@@ -6,24 +6,24 @@ module.exports = function (grunt) {
 
 		options: {
 
-			publish: '',
+			publish: 'public',
 			assets: '<%= options.publish %>/assets',
 
 			clean: {
 				all: ['<%= options.css.concat %>', '<%= options.css.min %>', '<%= options.less.compiled %>', '<%= options.js.min %>', '<%= options.js.concat %>'],
-				concat: ['<%= options.css.concat %>', '<%= options.js.concat %>', '<%= options.publish %>/sprites.css']
+				concat: ['<%= options.css.concat %>', '<%= options.js.concat %>']
 			},
 
 			css: {
 				base: '<%= options.assets %>/css',
-				files: ['<%= options.publish %>/sprites.css', '<%= options.css.base %>/styles.css'],
+				files: ['<%= options.css.base %>/*.css'],
 				concat: '<%= options.css.base %>/concat.css',
 				min: '<%= options.publish %>/styles.min.css'
 			},
 
 			js: {
 				base: '<%= options.assets %>/js',
-				files: ['<%= options.js.base %>/modernizr.min.js', '<%= options.js.base %>/scripts.js'],
+				files: ['<%= options.js.base %>/*.js'],
 				concat: '<%= options.js.base %>/concat.js',
 				min: '<%= options.publish %>/scripts.min.js'
 			},
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 				dir: '<%= options.assets %>/img/svg',
 				files: ['<%= options.svg.dir %>/*.svg'],
 				min: '<%= options.assets %>/img/sprites',
-				css: '<%= options.publish %>'
+				css: '<%= options.css.base %>'
 			}
 		},
 
@@ -142,7 +142,7 @@ module.exports = function (grunt) {
 
 		watch: {
 			scripts: {
-				files: ['<%= options.svg.files %>', '<%= options.js.files %>', '<%= options.less.base %>/*.less', '!<%= options.js.min %>', '!<%= options.less.compiled %>'],
+				files: ['<%= options.svg.files %>', '<%= options.js.files %>', '<%= options.less.base %>/*.less', '!<%= options.js.base %>/concat.js', '!<%= options.js.min %>', '!<%= options.less.compiled %>', '!<%= options.css.base %>/concat.css'],
 				tasks: ['scripts']
 			}
 		}
