@@ -16,7 +16,7 @@ module.exports = function (grunt) {
 
 			css: {
 				base: '<%= options.assets %>/css',
-				files: ['<%= options.css.base %>/*.css'],
+				files: ['<%= options.publish %>/sprites.css', '<%= options.css.base %>/*.css'],
 				concat: '<%= options.css.base %>/concat.css',
 				min: '<%= options.publish %>/styles.min.css'
 			},
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 				dir: '<%= options.assets %>/img/svg',
 				files: ['<%= options.svg.dir %>/*.svg'],
 				min: '<%= options.assets %>/img/sprites',
-				css: '<%= options.css.base %>'
+				css: '<%= options.publish %>'
 			}
 		},
 
@@ -141,8 +141,12 @@ module.exports = function (grunt) {
         },
 
 		watch: {
+			svg: {
+				files: ['<%= options.svg.files %>'],
+				tasks: ['svg']
+			},
 			scripts: {
-				files: ['<%= options.svg.files %>', '<%= options.js.files %>', '<%= options.less.base %>/*.less', '!<%= options.js.base %>/concat.js', '!<%= options.js.min %>', '!<%= options.less.compiled %>', '!<%= options.css.base %>/concat.css'],
+				files: ['<%= options.js.files %>', '<%= options.less.base %>/*.less', '!<%= options.js.base %>/concat.js', '!<%= options.js.min %>', '!<%= options.less.compiled %>', '!<%= options.css.base %>/concat.css'],
 				tasks: ['scripts']
 			}
 		}
@@ -161,5 +165,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-legacssy');
 
 	grunt.registerTask('default', 'watch');
-	grunt.registerTask('scripts', ['clean:all', 'svg-sprites', 'less', 'concat:css', 'concat:js', 'cssmin', 'legacssy', 'uglify', 'clean:concat']);
+	grunt.registerTask('svg', ['svg-sprites']);
+	grunt.registerTask('scripts', ['clean:all', 'less', 'concat:css', 'concat:js', 'cssmin', 'legacssy', 'uglify', 'clean:concat']);
 }
