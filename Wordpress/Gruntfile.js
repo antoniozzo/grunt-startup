@@ -122,17 +122,19 @@ module.exports = function (grunt) {
 
 		'svg-sprites': {
 			options: {
-				paths: {
-					spriteElements: '<%= options.svg.dir %>',
-					sprites: '<%= options.svg.min %>',
-					css: '<%= options.svg.css %>',
-				},
-				sizes: {
-					large: 30,
-					medium: 25,
-					small: 20
-				},
-				refSize: 30
+				spriteElementPath: '<%= options.svg.dir %>',
+				spritePath: '<%= options.svg.min %>',
+				cssPath: '<%= options.svg.css %>'
+			},
+			icons: {
+				options: {
+					sizes: {
+						large: 30,
+						medium: 25,
+						small: 20
+					},
+					refSize: 30
+				}
 			}
 		},
 
